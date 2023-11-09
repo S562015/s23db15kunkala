@@ -2,14 +2,15 @@ extends layout
  
 block content
   h1= title
-  - const results = [{ emp_name: "Nani", emp_dept: "Admin", emp_id: 11 },{ emp_name: "Akash", emp_dept: "Accounts", emp_id: 12 } ,{ emp_name: "Sai Krishna", emp_dept: "Recovery", emp_id: 13 },{ emp_name: "Sai Sumanth", emp_dept: "Recovery", emp_id: 14 }]
+  //- - const results = [{ emp_name: "Nani", emp_dept: "Admin", emp_id: 11 },{ emp_name: "Akash", emp_dept: "Accounts", emp_id: 12 } ,{ emp_name: "Sai Krishna", emp_dept: "Recovery", emp_id: 13 },{ emp_name: "Sai Sumanth", emp_dept: "Recovery", emp_id: 14 }]
+  - const results1 = results
   script.
     function buy(index){
       alert("Employee Data "+ (index+1));
     }
   div.container-fluid
     div.row
-        each item, index in results
+        each item, index in results1
           div.col-sm-2(onclick = `buy(${index})`)
              p Employee Name: #{item.emp_name}
              p Employee Department: #{item.emp_dept}

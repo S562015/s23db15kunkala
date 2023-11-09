@@ -15,9 +15,26 @@ exports.employee_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: Costume detail: ' + req.params.id);
 };
 // Handle Costume create on POST.
-exports.employee_create_post = function(req, res) {
-res.send('NOT IMPLEMENTED: Costume create POST');
-};
+exports.employee_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new Employee();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    // {"costume_type":"goat", "cost":12, "size":"large"}
+    document.emp_name = req.body.emp_name;
+    document.emp_dept = req.body.emp_dept;
+    document.emp_id = req.body.emp_id;
+    try{
+    let result = await document.save();
+    res.send(result);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+
 // Handle Costume delete form on DELETE.
 exports.employee_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Costume delete DELETE ' + req.params.id);
@@ -26,3 +43,16 @@ res.send('NOT IMPLEMENTED: Costume delete DELETE ' + req.params.id);
 exports.employee_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: Costume update PUT' + req.params.id);
 };
+
+// VIEWS
+// Handle a show all view
+exports.employee_view_all_Page = async function(req, res) {
+    try{
+    theEmployees = await Employee.find();
+    res.render('employee', { title: 'Employee Search Results', results: theEmployees });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
