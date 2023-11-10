@@ -48,10 +48,26 @@ exports.employee_create_post = async function(req, res) {
 exports.employee_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Costume delete DELETE ' + req.params.id);
 };
-// Handle Costume update form on PUT.
-exports.employee_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: Costume update PUT' + req.params.id);
+// Handle Employee update form on PUT.
+exports.employee_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+    try {
+    let toUpdate = await Employee.findById( req.params.id)
+    // Do updates of properties
+    if(req.body.emp_name) toUpdate.emp_name = req.body.emp_name;
+    if(req.body.emp_dept) toUpdate.emp_dept = req.body.emp_dept;
+    if(req.body.emp_id) toUpdate.emp_id = req.body.emp_id;
+    let result = await toUpdate.save();
+    console.log("Success " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": ${err}: Update for id ${req.params.id}
+    failed`);
+    }
 };
+
 
 // VIEWS
 // Handle a show all view
@@ -64,4 +80,4 @@ exports.employee_view_all_Page = async function(req, res) {
     res.status(500);
     res.send(`{"error": ${err}}`);
     }
-    };
+};
