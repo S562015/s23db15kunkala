@@ -10,10 +10,19 @@ exports.employee_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
-// for a specific Costume.
-exports.employee_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Costume detail: ' + req.params.id);
-};
+
+// for a specific Employee.
+exports.employee_detail = async function(req, res) {
+    console.log("Employee Id: " + req.params.id)
+    try {
+    result = await Employee.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
+
 // Handle Costume create on POST.
 exports.employee_create_post = async function(req, res) {
     console.log(req.body)
