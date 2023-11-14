@@ -96,9 +96,9 @@ exports.employee_view_all_Page = async function(req, res) {
 exports.employee_view_one_Page = async function(req, res) {
     console.log("single view for id " + req.query.id)
     try{
-    result = await Costume.findById( req.query.id)
-    res.render('costumedetail',
-    { title: 'Costume Detail', toShow: result });
+    result = await Employee.findById( req.query.id)
+    res.render('employedetail',
+    { title: 'Employee Detail', toShow: result });
     }
     catch(err){
     res.status(500)

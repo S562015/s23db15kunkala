@@ -1,0 +1,20 @@
+extends layout
+block content
+    h1= title
+    - let employeid = toShow._id
+    - let emp_name = toShow.emp_name
+    - let emp_dept = toShow.emp_dept
+    - let emp_id = toShow.emp_id
+    div
+    div.row
+    div(class='employeAttr mr-3') Employee reference _ID is:
+    div #{employeid}
+    div.row
+    div(class='employeAttr mr-3') Employee Name is:
+    div #{emp_name}
+    div.row
+    div(class='employeAttr mr-3') Employee Department is:
+    div #{emp_dept}
+    div.row
+    div(class='employeAttr mr-3') Employee Id is:
+    div #{emp_id}
