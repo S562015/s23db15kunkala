@@ -13,4 +13,5 @@ const employee_controlers= require('../controllers/employee');
 var router = express.Router();
 /* GET costumes */
 router.get('/', employee_controlers.employee_view_all_Page );
+router.get('/detail', employee_controlers.employee_view_one_Page);
 module.exports = router;
