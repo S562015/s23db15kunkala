@@ -1,20 +1,55 @@
 extends layout
+
 block content
-    h1= title
+  style.
+    .employee-container {
+      margin-top: 15px;
+      background-color: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .employeeAttr {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .employee-info {
+      margin-bottom: 12px;
+    }
+
+  h1= title
+
+  if (toShow == null)
+    h2 No employee to delete
+  else
     - let employeid = toShow._id
     - let emp_name = toShow.emp_name
     - let emp_dept = toShow.emp_dept
     - let emp_id = toShow.emp_id
-    div
-    div.row
-    div(class='employeAttr mr-3') Employee reference _ID is:
-    div #{employeid}
-    div.row
-    div(class='employeAttr mr-3') Employee Name is:
-    div #{emp_name}
-    div.row
-    div(class='employeAttr mr-3') Employee Department is:
-    div #{emp_dept}
-    div.row
-    div(class='employeAttr mr-3') Employee Id is:
-    div #{emp_id}
+
+    .employee-container
+      .row.employee-info
+        .col-md-3
+          div(class='employeAttr') Employee reference _ID is:
+        .col-md-3
+          div #{employeid}
+
+      .row.employee-info
+        .col-md-3
+          div(class='employeAttr') Employee Name is:
+        .col-md-3
+          div #{emp_name}
+
+      .row.employee-info
+        .col-md-3
+          div(class='employeAttr') Employee Department is:
+        .col-md-3
+          div #{emp_dept}
+
+      .row.employee-info
+        .col-md-3
+          div(class='employeAttr') Employee Id is:
+        .col-md-3
+          div #{emp_id}

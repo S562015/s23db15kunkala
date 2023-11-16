@@ -1,0 +1,57 @@
+extends layout
+
+block content
+  h1= title
+
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let emprefid = toShow._id
+    - let emp_name = toShow.emp_name
+    - let emp_dept = toShow.emp_dept
+    - let emp_id = toShow.emp_id
+    - let actionid = "/resource/employee/" + emprefid
+
+    script.
+      let actionid = "#{actionid}"
+
+    div
+      div.row
+        div(class='employeAttr mr-3') Reference ID is:
+        div #{emprefid}
+      div.row
+        div(class='employeAttr mr-3') Employee Name is:
+        div #{emp_name}
+      div.row
+        div(class='employeAttr mr-3') Employee Department is:
+        div #{emp_id}
+      div.row
+        div(class='employeAttr mr-3') Employee Id is:
+        div #{emp_dept}
+
+    button(class="btn btn-danger m-2", onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2", onclick="cancel()") Cancel
+
+    script.
+      function cancel() {
+        // Go back to the home page for the costume collection
+        window.location.href='/employee'
+      }
+
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeeded");
+          window.location.href='/employee';
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error );
+        });
+      }
