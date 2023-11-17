@@ -1,17 +1,32 @@
-extends layout
+//- extends layout
  
+//- block content
+//-   h1= title
+//-   //- - const results = [{ emp_name: "Nani", emp_dept: "Admin", emp_id: 11 },{ emp_name: "Akash", emp_dept: "Accounts", emp_id: 12 } ,{ emp_name: "Sai Krishna", emp_dept: "Recovery", emp_id: 13 },{ emp_name: "Sai Sumanth", emp_dept: "Recovery", emp_id: 14 }]
+//-   - const results1 = results
+//-   script.
+//-     function buy(index){
+//-       alert("Employee Data "+ (index+1));
+//-     }
+//-   div.container-fluid
+//-     div.row
+//-         each item, index in results1
+//-           div.col-sm-2(onclick = `buy(${index})`)
+//-              p Employee Name: #{item.emp_name}
+//-              p Employee Department: #{item.emp_dept}
+//-              p EmployeeId: #{item.emp_id}
+
+extends layout
 block content
   h1= title
-  //- - const results = [{ emp_name: "Nani", emp_dept: "Admin", emp_id: 11 },{ emp_name: "Akash", emp_dept: "Accounts", emp_id: 12 } ,{ emp_name: "Sai Krishna", emp_dept: "Recovery", emp_id: 13 },{ emp_name: "Sai Sumanth", emp_dept: "Recovery", emp_id: 14 }]
-  - const results1 = results
-  script.
-    function buy(index){
-      alert("Employee Data "+ (index+1));
-    }
-  div.container-fluid
-    div.row
-        each item, index in results1
-          div.col-sm-2(onclick = `buy(${index})`)
-             p Employee Name: #{item.emp_name}
-             p Employee Department: #{item.emp_dept}
-             p EmployeeId: #{item.emp_id}
+  - let employees = results;
+  div(class="container-fluid")
+    div(class="row m-1")
+      each employee in employees
+        - let destination = `dispatch(\"/employee/update?id=${employee._id}\")`
+        div(class="row-sm-2", class="m-1") Employee: #{employee.emp_name}(#{employee.emp_dept}) Id: #{employee.emp_id}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+    script.
+      function dispatch(path){
+        window.location.href=path
+      }
