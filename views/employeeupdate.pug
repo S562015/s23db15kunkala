@@ -10,41 +10,41 @@ block content
     - let emp_dept = toShow.emp_dept
     - let emp_id = toShow.emp_id
 
-  div.row(class='mb-2')
-    div.mr-1 ID is
-    div #{empreferenceid}
+    div.row(class='mb-2')
+        div.mr-1 ID is
+        div #{empreferenceid}
 
-  - let actionid = "/resource/employee/" + empreferenceid
+    - let actionid = "/resource/employee/" + empreferenceid
 
-  form(id='EmployeeForm', action= actionid, method="PUT")
-    div.form-group
-      label.employeAttr(for='emp_name') Employee Name
-      input#emp_name(type='text', name='emp_name', value= emp_name)
+    form(id='EmployeeForm', action= actionid, method="PUT")
+        div.form-group
+        label.employeAttr(for='emp_name') Employee Name
+        input#emp_name(type='text', name='emp_name', value= emp_name)
 
-    div.form-group
-      label.employeAttr(for='emp_dept') Employee Department
-      input#emp_dept(type='text', name='emp_dept', value= emp_dept)
+        div.form-group
+        label.employeAttr(for='emp_dept') Employee Department
+        input#emp_dept(type='text', name='emp_dept', value= emp_dept)
 
-    div.form-group
-      label.employeAttr(for='emp_id') Employee Id
-      input#emp_id(type='number', name='emp_id', value= emp_id)
+        div.form-group
+        label.employeAttr(for='emp_id') Employee Id
+        input#emp_id(type='number', name='emp_id', value= emp_id)
 
-    input(type="submit")
+        input(type="submit")
 
-  script.
-    document.forms['EmployeeForm'].addEventListener('submit', (event) => {
-      event.preventDefault();
-      // TODO do something here to show user that the form is being submitted
-      fetch(event.target.action, {
-        method: 'PUT',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-      }).then((resp) => {
-        return resp.json(); // or resp.text() or whatever the server sends
-      }).then((body) => {
-        alert("Update succeeded");
-        // TODO handle body
-      }).catch((error) => {
-        // TODO handle error
-        alert("Update failed: " + error);
-      });
-    });
+    script.
+        document.forms['EmployeeForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show user that the form is being submitted
+        fetch(event.target.action, {
+            method: 'PUT',
+            body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+            return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+            alert("Update succeeded");
+            // TODO handle body
+        }).catch((error) => {
+            // TODO handle error
+            alert("Update failed: " + error);
+        });
+        });
