@@ -58,9 +58,18 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 require('dotenv').config();
-const connectionString = process.env.MONGO_CON;
+var connectionString = process.env.MONGO_CON;
 mongoose = require('mongoose');
-mongoose.connect(connectionString);
+// mongoose.connect(connectionString);
+
+mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB');
+    // Your code here
+  })
+  .catch(error => {
+    console.error('Error connecting to MongoDB:', error);
+  });
 
 //Get the default connection
 var db = mongoose.connection;
