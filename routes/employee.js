@@ -25,11 +25,11 @@ const secured = (req, res, next) => {
 router.get('/', employee_controlers.employee_view_all_Page );
 router.get('/detail', employee_controlers.employee_view_one_Page);
 /* GET create costume page */
-router.get('/create', employee_controlers.employee_create_Page);
+router.get('/create', secured, employee_controlers.employee_create_Page);
 /* GET create update page */
 router.get('/update',secured, employee_controlers.employee_update_Page);
 /* GET delete costume page */
-router.get('/delete', employee_controlers.employee_delete_Page);
+router.get('/delete',secured, employee_controlers.employee_delete_Page);
 
 
 module.exports = router;

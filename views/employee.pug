@@ -1,3 +1,29 @@
+extends layout
+block content
+  h1= title
+  - let employees = results;
+  div(class="row m-1")
+    button.btn(class="btn-success", onclick="dispatch('/employee/create')") Create New Employee
+  div(class="container-fluid")
+    each employee in employees
+      div(class="row m-1")
+        div(class="col-sm-4")
+          div(class="card")
+            div(class="card-body")
+              h5(class="card-title") Employee: #{employee.emp_name}(#{employee.emp_dept}) Id: #{employee.emp_id}
+
+              //- Buttons side by side
+              div(class="d-flex justify-content-between")
+                button.btn.btn-primary.btn-sm(onclick=`dispatch("/employee/update?id=${employee._id}")`) Update
+                button.btn.btn-primary.btn-sm(onclick=`dispatch("/employee/detail?id=${employee._id}")`) Details
+                button.btn.btn-primary.btn-sm(onclick=`dispatch("/employee/delete?id=${employee._id}")`) Delete
+
+    script.
+      function dispatch(path){
+        window.location.href = path;
+      }
+
+
 //- extends layout
  
 //- block content
@@ -16,17 +42,25 @@
 //-              p Employee Department: #{item.emp_dept}
 //-              p EmployeeId: #{item.emp_id}
 
-extends layout
-block content
-  h1= title
-  - let employees = results;
-  div(class="container-fluid")
-    div(class="row m-1")
-      each employee in employees
-        - let destination = `dispatch(\"/employee/update?id=${employee._id}\")`
-        div(class="row-sm-2", class="m-1") Employee: #{employee.emp_name}(#{employee.emp_dept}) Id: #{employee.emp_id}
-          button.btn( class="btn-primary ml-1", onclick= destination) Update
-    script.
-      function dispatch(path){
-        window.location.href=path
-      }
+//- extends layout
+//- block content
+//-   h1= title
+//-   - let employees = results;
+//-   div(class="container-fluid")
+//-     div(class="row m-1")
+//-       each employee in employees
+//-         - let destination = `dispatch(\"/employee/update?id=${employee._id}\")`
+//-         div(class="row-sm-2", class="m-1") Employee: #{employee.emp_name}(#{employee.emp_dept}) Id: #{employee.emp_id}
+//-           button.btn( class="btn-primary ml-1", onclick= destination) Update
+
+//-         - let destination1 = `dispatch(\"/employee/detail?id=${employee._id}\")`
+//-         div(class="row-sm-2", class="m-1") Employee: #{employee.emp_name}(#{employee.emp_dept}) Id: #{employee.emp_id}
+//-           button.btn( class="btn-primary ml-1", onclick= destination1) Details
+
+//-         - let destination2 = `dispatch(\"/employee/delete?id=${employee._id}\")`
+//-         div(class="row-sm-2", class="m-1") Employee: #{employee.emp_name}(#{employee.emp_dept}) Id: #{employee.emp_id}
+//-           button.btn( class="btn-primary ml-1", onclick= destination2) Delete
+//-     script.
+//-       function dispatch(path){
+//-         window.location.href=path
+//-       }
